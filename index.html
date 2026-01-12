@@ -154,28 +154,41 @@
     <!-- Navigation -->
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-3 md:mb-0">
+        <div class="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex flex-wrap justify-between items-center">
+
+            <div>
                 <a href="#"
                     class="text-2xl font-oswald font-bold tracking-tighter text-white hover:text-brand-red transition-colors glitch-text"
                     data-text="NM">NEW MONSTER</a>
             </div>
-            <!-- Mobile: Scrollable Horizontal Menu -->
-            <div class="w-full md:w-auto overflow-x-auto no-scrollbar">
-                <ul
-                    class="flex space-x-5 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center whitespace-nowrap px-1 pb-1 md:pb-0 justify-start md:justify-end">
-                    <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors">TOP</a></li>
-                    <li><a href="#media" class="text-brand-red hover:text-white transition-colors">VIDEO</a></li>
-                    <!-- Kept as main media landing for now, or just VIDEO -->
-                    <li><a href="#music" class="text-gray-300 hover:text-brand-red transition-colors">MUSIC</a></li>
-                    <li><a href="#schedule" class="text-gray-300 hover:text-brand-red transition-colors">SCHEDULE</a>
-                    </li>
-                    <li><a href="#members" class="text-gray-300 hover:text-brand-red transition-colors">MEMBERS</a></li>
-                    <li><a href="#audition" class="text-gray-300 hover:text-brand-red transition-colors">CONTACT</a>
-                    </li>
 
-                    <!-- SNS Icons -->
-                    <li class="pl-4 flex space-x-4 border-l border-gray-700">
+            <button id="menu-btn"
+                class="md:hidden text-white text-2xl focus:outline-none w-12 h-12 flex items-center justify-center">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div id="menu-items"
+                class="hidden absolute top-full right-0 w-64 bg-black/95 backdrop-blur-sm border-b border-l border-white/10 p-6 md:static md:block md:w-auto md:bg-transparent md:border-none md:p-0 rounded-bl-xl">
+                <ul
+                    class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center">
+                    <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">TOP</a></li>
+                    <li><a href="#media" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">VIDEO</a></li>
+                    <li><a href="#music" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">MUSIC</a></li>
+                    <li><a href="#schedule"
+                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">SCHEDULE</a></li>
+                    <li><a href="#members"
+                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">MEMBERS</a></li>
+                    <li><a href="#audition"
+                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                            onclick="toggleMenu()">CONTACT</a></li>
+
+                    <li
+                        class="pt-4 md:pt-0 md:pl-4 flex space-x-4 md:border-l border-gray-700 justify-center w-full md:w-auto border-t md:border-t-0 mt-2 md:mt-0">
                         <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
                                 class="fa-brands fa-x-twitter"></i></a>
                         <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
@@ -185,8 +198,30 @@
             </div>
         </div>
     </nav>
-    </div>
-    </nav>
+    <script>
+        // ハンバーガーメニューの開閉機能
+        const menuBtn = document.getElementById('menu-btn');
+        const menuItems = document.getElementById('menu-items');
+        const menuIcon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            toggleMenu();
+        });
+
+        function toggleMenu() {
+            // hiddenクラスを付け外しして表示・非表示を切り替え
+            menuItems.classList.toggle('hidden');
+
+            // アイコンを「三」から「×」に切り替え
+            if (menuItems.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        }
+    </script>
 
     <!-- Hero Section -->
     <header id="top"
