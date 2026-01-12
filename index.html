@@ -133,37 +133,59 @@
                 clip: rect(81px, 9999px, 2px, 0);
             }
         }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
     </style>
 </head>
 
 <body>
 
     <!-- Navigation -->
+    <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
+        <div class="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-3 md:mb-0">
                 <a href="#"
                     class="text-2xl font-oswald font-bold tracking-tighter text-white hover:text-brand-red transition-colors glitch-text"
                     data-text="NM">NEW MONSTER</a>
             </div>
-            <ul class="flex space-x-6 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center">
-                <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors">TOP</a></li>
-                <li><a href="#media" class="text-brand-red hover:text-white transition-colors">VIDEO</a></li>
-                <!-- Kept as main media landing for now, or just VIDEO -->
-                <li><a href="#music" class="text-gray-300 hover:text-brand-red transition-colors">MUSIC</a></li>
-                <li><a href="#schedule" class="text-gray-300 hover:text-brand-red transition-colors">SCHEDULE</a></li>
-                <li><a href="#members" class="text-gray-300 hover:text-brand-red transition-colors">MEMBERS</a></li>
-                <li><a href="#audition" class="text-gray-300 hover:text-brand-red transition-colors">CONTACT</a></li>
+            <!-- Mobile: Scrollable Horizontal Menu -->
+            <div class="w-full md:w-auto overflow-x-auto no-scrollbar">
+                <ul
+                    class="flex space-x-5 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center whitespace-nowrap px-1 pb-1 md:pb-0 justify-start md:justify-end">
+                    <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors">TOP</a></li>
+                    <li><a href="#media" class="text-brand-red hover:text-white transition-colors">VIDEO</a></li>
+                    <!-- Kept as main media landing for now, or just VIDEO -->
+                    <li><a href="#music" class="text-gray-300 hover:text-brand-red transition-colors">MUSIC</a></li>
+                    <li><a href="#schedule" class="text-gray-300 hover:text-brand-red transition-colors">SCHEDULE</a>
+                    </li>
+                    <li><a href="#members" class="text-gray-300 hover:text-brand-red transition-colors">MEMBERS</a></li>
+                    <li><a href="#audition" class="text-gray-300 hover:text-brand-red transition-colors">CONTACT</a>
+                    </li>
 
-                <!-- SNS Icons -->
-                <li class="pl-4 flex space-x-4 border-l border-gray-700">
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
-                            class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
-                            class="fa-brands fa-instagram"></i></a>
-                </li>
-            </ul>
+                    <!-- SNS Icons -->
+                    <li class="pl-4 flex space-x-4 border-l border-gray-700">
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
+                                class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
+                                class="fa-brands fa-instagram"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
+    </div>
     </nav>
 
     <!-- Hero Section -->
