@@ -166,7 +166,8 @@
             opacity: 0;
             transform: scale(0.9);
             transition: all 1.5s ease;
-            transition-delay: 0.8s;
+            transition-delay: 1.8s;
+            /* Start after title animation (0.3s + 1.2s) */
         }
 
         .intro-active .hero-sub-reveal {
@@ -322,7 +323,7 @@
                     -Next Generation Rock-
                 </p>
             </div>
-            <div class="mt-8 space-y-2">
+            <div class="mt-8 space-y-2 hero-sub-reveal" style="transition-delay: 2.1s;">
                 <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
                     ゼロから始めるロックバンドオーディション<br>
                     <span class="text-sm opacity-70">A Rock Band Audition Starting from Zero</span>
@@ -332,7 +333,7 @@
                     <span class="text-sm opacity-70">Rock Bands Make Life Shine</span>
                 </p>
             </div>
-            <div class="mt-12">
+            <div class="mt-12 hero-sub-reveal" style="transition-delay: 2.4s;">
                 <a href="#audition"
                     class="inline-block border border-white px-8 py-3 text-sm tracking-widest hover:bg-brand-red hover:border-brand-red transition-colors duration-300 uppercase">
                     Join the Force / 応募する
