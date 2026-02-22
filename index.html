@@ -147,30 +147,31 @@
             transform: translateY(0);
         }
 
-        /* Scroll Animations */
-        .reveal {
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Hero Entrance Reveal */
         .hero-title-reveal {
-            opacity: 1;
-            transform: translateY(0);
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+            transform: translateY(50px);
+            opacity: 0;
             transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition-delay: 0.3s;
+        }
+
+        .intro-active .hero-title-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .hero-sub-reveal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.5s ease;
+            transition-delay: 0.8s;
+        }
+
+        .intro-active .hero-sub-reveal {
             opacity: 1;
             transform: scale(1);
-            transition: all 1.5s ease;
         }
 
         .reveal-scale {
@@ -666,8 +667,14 @@
             }, 500);
         }
 
-        /* Initialize Scroll Reveal */
+        /* Initialize Scroll Reveal & Intro */
         window.addEventListener('DOMContentLoaded', () => {
+            // Trigger Hero Animation
+            setTimeout(() => {
+                document.body.classList.add('intro-active');
+            }, 100);
+
+            // Scroll Observer
             document.querySelectorAll('.reveal, .reveal-scale').forEach(el => {
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight) {
