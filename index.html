@@ -139,12 +139,89 @@
             position: relative;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #8B0000;
+            animation: loading 2s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                left: -100%;
+            }
+
+            50% {
+                left: 0;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Intro Entrance Animation */
+        .hero-title-reveal {
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition-delay: 0.5s;
+        }
+
+        .intro-active .hero-title-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .hero-sub-reveal {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1.5s ease;
+            transition-delay: 1.2s;
+        }
+
+        .intro-active .hero-sub-reveal {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .reveal-scale {
@@ -170,12 +247,12 @@
 
         .modal-close-btn {
             position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 2.5rem;
+            top: -3rem;
+            right: 0;
+            font-size: 3rem;
             color: #ffffff;
-            transition: color 0.3s;
-            z-index: 10;
+            transition: all 0.3s;
+            z-index: 110;
         }
 
         .modal-close-btn:hover {
@@ -206,7 +283,15 @@
     </style>
 </head>
 
-<body>
+<body class="bg-black text-white">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content reveal active">
+            <h2 class="text-4xl font-oswald font-bold tracking-[0.5em] mb-4">VOCAL GENESIS</h2>
+            <div class="loader-bar mx-auto"></div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <!-- Navigation -->
@@ -284,13 +369,17 @@
         class="relative h-screen w-full bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed flex items-center justify-center">
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-10 text-center px-4">
-            <h1 class="text-6xl md:text-9xl font-bold text-oswald tracking-tighter uppercase mb-4 glitch-text relative inline-block mix-blend-screen"
-                data-text="VOICE GENESIS">
-                VOICE GENESIS
-            </h1>
-            <p class="text-xl md:text-3xl tracking-[0.2em] text-gray-300 font-bold uppercase mt-4">
-                -Next Generation Rock-
-            </p>
+            <div class="hero-title-reveal">
+                <h1 class="text-7xl md:text-[10rem] font-bold text-oswald tracking-tighter uppercase mb-4 glitch-text relative inline-block mix-blend-screen leading-none"
+                    data-text="VOICE GENESIS">
+                    VOICE GENESIS
+                </h1>
+            </div>
+            <div class="hero-sub-reveal">
+                <p class="text-xl md:text-3xl tracking-[0.3em] text-gray-300 font-bold uppercase mt-6">
+                    -Next Generation Rock-
+                </p>
+            </div>
             <div class="mt-8 space-y-2">
                 <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
                     ゼロから始めるロックバンドオーディション<br>
@@ -310,16 +399,17 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div
-            class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex justify-center w-full max-w-[24px]">
-            <svg class="w-6 h-6 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
-                </path>
-            </svg>
+        <div class="absolute bottom-10 left-0 w-full flex justify-center pointer-events-none hero-sub-reveal">
+            <div class="animate-bounce">
+                <svg class="w-10 h-10 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
         </div>
     </header>
 
-    </section>
+
 
     <!-- Concept Section -->
     <section id="concept" class="py-32 bg-black-pure px-6">
@@ -556,7 +646,7 @@
     <div id="member-modal"
         class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-xl flex items-start justify-center p-4 overflow-y-auto"
         onclick="closeMemberDetail()">
-        <div id="modal-content" class="max-w-5xl w-full reveal-scale my-auto pt-10 pb-10"
+        <div id="modal-content" class="max-w-5xl w-full reveal-scale my-auto pt-16 pb-10"
             onclick="event.stopPropagation()">
             <button onclick="closeMemberDetail()" class="modal-close-btn">&times;</button>
             <div id="modal-body">
@@ -634,6 +724,18 @@
                 document.body.style.overflow = 'auto';
             }, 500);
         }
+
+        /* Preloader Control */
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.visibility = 'hidden';
+                    document.body.classList.add('intro-active');
+                }, 1000);
+            }, 1000);
+        });
 
         /* Scroll Reveal Observer */
         const observerOptions = {
