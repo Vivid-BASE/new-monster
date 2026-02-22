@@ -310,7 +310,8 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex justify-center w-full max-w-[24px]">
             <svg class="w-6 h-6 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
                 </path>
@@ -351,31 +352,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 
-                <!-- GUITAR: SCIN -->
-                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('scin')">
-                    <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
-                        <img src="images/member_shin.jpg" alt="SCIN - Guitar"
-                            class="member-img w-full h-full object-cover">
-                    </div>
-                    <div class="mt-8 text-center">
-                        <h3 class="text-4xl font-oswald font-bold group-hover:text-brand-red transition-colors">
-                            SCIN</h3>
-                        <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-4">Guitar / ギター</p>
-
-                        <div class="flex justify-center space-x-6">
-                            <a href="https://x.com/SCIN_guitar" target="_blank"
-                                class="text-white hover:text-brand-red transition-colors text-xl"><i
-                                    class="fa-brands fa-x-twitter"></i></a>
-                            <a href="https://www.instagram.com/scin_guitar/" target="_blank"
-                                class="text-white hover:text-brand-red transition-colors text-xl"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- BASS: YOU -->
-                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('you')"
-                    style="transition-delay: 0.2s;">
+                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('you')">
                     <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
                         <img src="images/member_you.jpg" alt="YOU - Bass" class="member-img w-full h-full object-cover">
                     </div>
@@ -396,7 +374,30 @@
                     </div>
                 </div>
 
-                <!-- DRUM: SHOW -->
+                <!-- GUITAR: SCIN -->
+                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('scin')"
+                    style="transition-delay: 0.2s;">
+                    <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
+                        <img src="images/member_shin.jpg" alt="SCIN - Guitar"
+                            class="member-img w-full h-full object-cover">
+                    </div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-4xl font-oswald font-bold group-hover:text-brand-red transition-colors">
+                            SCIN</h3>
+                        <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-4">Guitar / ギター</p>
+
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://x.com/SCIN_guitar" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/scin_guitar/" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drum: SHOW -->
                 <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('show')"
                     style="transition-delay: 0.4s;">
                     <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
@@ -440,7 +441,7 @@
                         class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">AUDITION</span>
                 </h2>
                 <div class="space-y-4 text-gray-300">
-                    <p class="text-xl md:text-2xl font-oswald uppercase tracking-widest text-white">
+                    <p class="text-lg md:text-2xl font-oswald uppercase tracking-widest text-white">
                         Are you the Voice that conquers the world?<br>
                         <span class="text-brand-red">世界を征服する「声」を探している。</span>
                     </p>
@@ -523,7 +524,7 @@
                 </div>
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Profile /
-                        プロフィール・自己理解</label>
+                        プロフィール</label>
                     <textarea name="profile" rows="4" required
                         class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"></textarea>
                 </div>
@@ -553,9 +554,10 @@
 
     <!-- Member Detail Modal -->
     <div id="member-modal"
-        class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+        class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-xl flex items-start justify-center p-4 overflow-y-auto"
         onclick="closeMemberDetail()">
-        <div id="modal-content" class="max-w-5xl w-full reveal-scale" onclick="event.stopPropagation()">
+        <div id="modal-content" class="max-w-5xl w-full reveal-scale my-auto pt-10 pb-10"
+            onclick="event.stopPropagation()">
             <button onclick="closeMemberDetail()" class="modal-close-btn">&times;</button>
             <div id="modal-body">
                 <!-- Content will be injected by JS -->
