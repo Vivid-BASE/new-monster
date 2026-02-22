@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW MONSTER | Official Website</title>
+    <title>Vocal Genesis Project | Official Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@300;400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -134,17 +134,74 @@
             }
         }
 
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Scroll Animations */
+        .reveal {
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
 
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            /* IE and Edge */
-            scrollbar-width: none;
-            /* Firefox */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+
+        .reveal-scale.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Modal UX Improvement */
+        #modal-content {
+            background: #121212;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            color: #ffffff;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            color: #8B0000;
+        }
+
+        /* Button Flare Effect */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-premium::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .btn-premium:hover::after {
+            left: 100%;
         }
     </style>
 </head>
@@ -155,46 +212,45 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-sm border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex flex-wrap justify-between items-center">
+            <a href="#"
+                class="text-2xl font-oswald font-bold tracking-tighter text-white hover:text-brand-red transition-colors glitch-text"
+                data-text="VG">VOCAL GENESIS PROJECT</a>
 
-            <div>
-                <a href="#"
-                    class="text-2xl font-oswald font-bold tracking-tighter text-white hover:text-brand-red transition-colors glitch-text"
-                    data-text="NM">NEW MONSTER</a>
-            </div>
+            <div class="flex items-center">
+                <button id="menu-btn"
+                    class="md:hidden text-white text-2xl focus:outline-none w-12 h-12 flex items-center justify-center relative z-50">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
 
-            <button id="menu-btn"
-                class="md:hidden text-white text-2xl focus:outline-none w-12 h-12 flex items-center justify-center relative z-50">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+                <div id="menu-items"
+                    class="hidden absolute top-full right-0 w-64 bg-black/95 backdrop-blur-sm border-b border-l border-white/10 p-6 md:static md:block md:w-auto md:bg-transparent md:border-none md:p-0 rounded-bl-xl">
+                    <ul
+                        class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center uppercase">
+                        <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                                onclick="toggleMenu()">TOP</a></li>
+                        <li><a href="#concept"
+                                class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                                onclick="toggleMenu()">CONCEPT</a></li>
+                        <li><a href="#members"
+                                class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                                onclick="toggleMenu()">MEMBERS</a></li>
+                        <li><a href="#audition"
+                                class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
+                                onclick="toggleMenu()">AUDITION</a></li>
+                        <li><a href="#audition"
+                                class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0 border border-white/30 px-4 py-1 hover:border-brand-red ml-0 md:ml-4"
+                                onclick="toggleMenu()">APPLY</a></li>
 
-            <div id="menu-items"
-                class="hidden absolute top-full right-0 w-64 bg-black/95 backdrop-blur-sm border-b border-l border-white/10 p-6 md:static md:block md:w-auto md:bg-transparent md:border-none md:p-0 rounded-bl-xl">
-                <ul
-                    class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 text-sm font-oswald font-bold tracking-widest items-center">
-                    <li><a href="#" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">TOP</a></li>
-                    <li><a href="#media" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">VIDEO</a></li>
-                    <li><a href="#music" class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">MUSIC</a></li>
-                    <li><a href="#schedule"
-                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">SCHEDULE</a></li>
-                    <li><a href="#members"
-                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">MEMBERS</a></li>
-                    <li><a href="#audition"
-                            class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
-                            onclick="toggleMenu()">CONTACT</a></li>
-
-                    <li
-                        class="pt-4 md:pt-0 md:pl-4 flex space-x-4 md:border-l border-gray-700 justify-center w-full md:w-auto border-t md:border-t-0 mt-2 md:mt-0">
-                        <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
-                                class="fa-brands fa-x-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-brand-red transition-colors"><i
-                                class="fa-brands fa-instagram"></i></a>
-                    </li>
-                </ul>
+                        <li
+                            class="pt-4 md:pt-0 md:pl-4 flex space-x-4 md:border-l border-gray-700 justify-center w-full md:w-auto border-t md:border-t-0 mt-2 md:mt-0">
+                            <a href="https://x.com/VOCALGENESIS"
+                                class="text-white hover:text-brand-red transition-colors text-lg"><i
+                                    class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#" class="text-white hover:text-brand-red transition-colors text-lg"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -229,16 +285,26 @@
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-10 text-center px-4">
             <h1 class="text-6xl md:text-9xl font-bold text-oswald tracking-tighter uppercase mb-4 glitch-text relative inline-block mix-blend-screen"
-                data-text="NEW MONSTER">
-                NEW MONSTER
+                data-text="VOICE GENESIS">
+                VOICE GENESIS
             </h1>
-            <p class="text-xl md:text-3xl tracking-[0.5em] text-gray-300 font-light uppercase mt-4">
-                Global Standard Rock from Japan
+            <p class="text-xl md:text-3xl tracking-[0.2em] text-gray-300 font-bold uppercase mt-4">
+                -Next Generation Rock-
             </p>
+            <div class="mt-8 space-y-2">
+                <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
+                    ゼロから始めるロックバンドオーディション<br>
+                    <span class="text-sm opacity-70">A Rock Band Audition Starting from Zero</span>
+                </p>
+                <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
+                    ロックバンドは人生を輝かせる<br>
+                    <span class="text-sm opacity-70">Rock Bands Make Life Shine</span>
+                </p>
+            </div>
             <div class="mt-12">
                 <a href="#audition"
                     class="inline-block border border-white px-8 py-3 text-sm tracking-widest hover:bg-brand-red hover:border-brand-red transition-colors duration-300 uppercase">
-                    Join the Force
+                    Join the Force / 応募する
                 </a>
             </div>
         </div>
@@ -252,250 +318,107 @@
         </div>
     </header>
 
-    <!-- Media Section -->
-    <section id="media" class="py-0 bg-black-pure">
-        <!-- Video Part -->
-        <!-- Video Part -->
-        <div class="py-12 px-4 bg-black-pure">
-            <div class="max-w-5xl mx-auto w-full aspect-video shadow-2xl border border-gray-800">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/zy2TLLeNgp0"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <!-- Audio Part -->
-        <div id="music" class="bg-dark-gray py-12 px-6">
-            <div class="max-w-4xl mx-auto">
-                <h3 class="text-brand-red text-sm tracking-[0.3em] font-bold mb-6 uppercase">Music Tracks</h3>
-
-                <div class="space-y-4">
-                    <!-- Track 1: Fearless -->
-                    <div
-                        class="flex items-center justify-between border-b border-gray-800 pb-4 hover:bg-white/5 transition-colors p-4 group">
-                        <div class="flex items-center space-x-4">
-                            <span class="text-gray-500 font-oswald text-xl">01</span>
-                            <div>
-                                <h4
-                                    class="text-2xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
-                                    Fearless</h4>
-                                <p class="text-xs text-gray-500 uppercase tracking-widest">New Monster</p>
-                            </div>
-                        </div>
-                        <audio controls class="hidden" id="audio-fearless" src="music/Fearless.mp3"></audio>
-                        <button onclick="playAudio('audio-fearless', this)"
-                            class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all">
-                            <i class="fa-solid fa-play text-white text-sm"></i>
-                        </button>
-                    </div>
-
-                    <!-- Track 2: Echoes of the Void -->
-                    <div
-                        class="flex items-center justify-between border-b border-gray-800 pb-4 hover:bg-white/5 transition-colors p-4 group">
-                        <div class="flex items-center space-x-4">
-                            <span class="text-gray-500 font-oswald text-xl">02</span>
-                            <div>
-                                <h4
-                                    class="text-2xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
-                                    Echoes of the Void</h4>
-                                <p class="text-xs text-gray-500 uppercase tracking-widest">New Monster</p>
-                            </div>
-                        </div>
-                        <audio controls class="hidden" id="audio-echoes" src="music/Echoes of the Void.mp3"></audio>
-                        <button onclick="playAudio('audio-echoes', this)"
-                            class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-brand-red hover:border-brand-red transition-all">
-                            <i class="fa-solid fa-play text-white text-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
-    <script>
-        function playAudio(audioId, btn) {
-            var audio = document.getElementById(audioId);
-            var icon = btn.querySelector('i');
-
-            // Stop all other audio
-            document.querySelectorAll('audio').forEach(function (a) {
-                if (a.id !== audioId) {
-                    a.pause();
-                    // Reset icons for others (simple implementation)
-                    // In a production app, we'd loop through buttons to reset icons
-                }
-            });
-
-            if (audio.paused) {
-                audio.play();
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
-            } else {
-                audio.pause();
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
-            }
-        }
-    </script>
-
-    <!-- Schedule Section -->
-    <section id="schedule" class="py-20 bg-dark-gray text-white px-6">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-brand-red text-sm tracking-[0.3em] font-bold mb-6 uppercase text-center md:text-left">Live
-                Schedule</h2>
-            <div class="space-y-1">
-                <!-- Item 1 -->
-                <div
-                    class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-800 py-6 hover:bg-white/5 transition-colors px-4">
-                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 mb-4 md:mb-0">
-                        <span class="text-2xl font-oswald font-bold text-gray-400">2026.04.15</span>
-                        <span class="text-3xl font-oswald font-bold uppercase">TOKYO DOME CITY HALL</span>
-                        <span class="text-gray-500 text-sm tracking-widest uppercase">Opening Act for GIANT</span>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="inline-block px-6 py-2 border border-gray-600 text-sm hover:bg-white hover:text-black transition-colors uppercase tracking-widest">Tickets</a>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div
-                    class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-800 py-6 hover:bg-white/5 transition-colors px-4">
-                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 mb-4 md:mb-0">
-                        <span class="text-2xl font-oswald font-bold text-gray-400">2026.05.22</span>
-                        <span class="text-3xl font-oswald font-bold uppercase">OSAKA JO HALL</span>
-                        <span class="text-gray-500 text-sm tracking-widest uppercase">Monster Tour 2026</span>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="inline-block px-6 py-2 border border-gray-600 text-sm hover:bg-white hover:text-black transition-colors uppercase tracking-widest">Tickets</a>
-                    </div>
-                </div>
-                <!-- Item 3 -->
-                <div
-                    class="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-800 py-6 hover:bg-white/5 transition-colors px-4">
-                    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 mb-4 md:mb-0">
-                        <span class="text-2xl font-oswald font-bold text-gray-400">2026.06.30</span>
-                        <span class="text-3xl font-oswald font-bold uppercase">BUDOKAN</span>
-                        <span class="text-brand-red text-sm tracking-widest uppercase font-bold">SOLD OUT</span>
-                    </div>
-                    <div>
-                        <span
-                            class="inline-block px-6 py-2 border border-transparent text-gray-500 text-sm cursor-not-allowed uppercase tracking-widest">Sold
-                            Out</span>
-                    </div>
-                </div>
+    <!-- Concept Section -->
+    <section id="concept" class="py-32 bg-black-pure px-6">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="text-brand-red text-sm tracking-[0.3em] font-bold mb-8 uppercase">Concept / コンセプト</h2>
+            <p class="text-3xl md:text-5xl font-oswald font-bold leading-tight mb-12">
+                THE EVOLUTION OF SOUND.<br>
+                <span class="text-gray-500">DEFINED BY VOICE.</span>
+            </p>
+            <div class="space-y-6 text-gray-400 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto font-light">
+                <p>
+                    音の進化、その極致へ。<br>
+                    未知なる道を拓き、唯一無二の「声」がそこに魂を吹き込む。
+                </p>
+                <p class="opacity-60 text-base md:text-lg">
+                    We push the boundaries of sound to its absolute limit.<br>
+                    Where new paths are forged, a singular "Voice" breathes life into the soul.
+                </p>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="py-24 bg-black-pure px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-brand-red text-sm tracking-[0.3em] font-bold mb-6 uppercase">Concept</h2>
-            <p class="text-4xl md:text-6xl font-oswald font-bold leading-tight mb-8">
-                WE ARE THE<br>
-                <span class="text-gray-500">NEW MONSTER.</span>
-            </p>
-            <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-                Heavy riffs, solid beats, and a minimal philosophy. <br>
-                We are building a sound that transcends borders. <br>
-                Preparing to conquer the stadium.
-            </p>
+            <div class="mt-16 w-24 h-px bg-brand-red mx-auto"></div>
         </div>
     </section>
 
     <!-- Members Section -->
-    <section id="members" class="py-20 bg-black-pure px-4">
+    <section id="members" class="py-32 bg-black-pure px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-center text-4xl md:text-5xl font-oswald font-bold mb-16 tracking-tighter">MEMBERS</h2>
+            <h2 class="text-center text-4xl md:text-5xl font-oswald font-bold mb-16 tracking-tighter reveal">MEMBERS /
+                メンバー</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 
-                <!-- VOCAL: AUDITION (Mobile: 1, PC: 2) -->
-                <div class="member-card group relative order-1 lg:order-2">
-                    <div class="aspect-[3/4] overflow-hidden bg-black relative">
-                        <img src="images/vocal_silhouette.png" alt="Seeking Vocalist"
-                            class="member-img w-full h-full object-cover opacity-60">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span
-                                class="text-6xl font-oswald font-bold text-white opacity-20 group-hover:opacity-100 transition-opacity">?</span>
-                        </div>
+                <!-- GUITAR: SCIN -->
+                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('scin')">
+                    <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
+                        <img src="images/member_shin.jpg" alt="SCIN - Guitar"
+                            class="member-img w-full h-full object-cover">
                     </div>
-                    <div class="mt-4 text-center">
-                        <h3 class="text-2xl font-oswald font-bold uppercase text-brand-red">SEEKING</h3>
-                        <p class="text-sm text-gray-400 tracking-widest uppercase mb-3">Vocalist</p>
-                        <p class="text-xs text-gray-500 leading-relaxed px-4">
-                            We are looking for a vocalist with a world-class voice and presence.
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-4 opacity-50">
-                            <i class="fa-brands fa-twitter text-white"></i>
-                            <i class="fa-brands fa-instagram text-white"></i>
-                        </div>
-                    </div>
-                </div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-4xl font-oswald font-bold group-hover:text-brand-red transition-colors">
+                            SCIN</h3>
+                        <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-4">Guitar / ギター</p>
 
-                <!-- GUITAR: Scin (Mobile: 2, PC: 3) -->
-                <div class="member-card group relative order-2 lg:order-3">
-                    <div class="aspect-[3/4] overflow-hidden bg-black">
-                        <img src="images/shin.jpg" alt="Scin - Guitar" class="member-img w-full h-full object-cover">
-                    </div>
-                    <div class="mt-4 text-center">
-                        <h3 class="text-2xl font-oswald font-bold group-hover:text-brand-red transition-colors">
-                            Scin</h3>
-                        <p class="text-sm text-gray-400 tracking-widest uppercase mb-3">Guitar</p>
-                        <p class="text-xs text-gray-500 leading-relaxed px-4">
-                            Creates heavy walls of sound. The backbone of the band's aggression.
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-4">
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
-                                    class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://x.com/SCIN_guitar" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/scin_guitar/" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
                                     class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- BASS: YOU (Mobile: 3, PC: 1) -->
-                <div class="member-card group relative order-3 lg:order-1">
-                    <div class="aspect-[3/4] overflow-hidden bg-black">
-                        <img src="images/you.png" alt="YOU - Bass" class="member-img w-full h-full object-cover">
+                <!-- BASS: YOU -->
+                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('you')"
+                    style="transition-delay: 0.2s;">
+                    <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
+                        <img src="images/member_you.jpg" alt="YOU - Bass" class="member-img w-full h-full object-cover">
                     </div>
-                    <div class="mt-4 text-center">
+                    <div class="mt-8 text-center">
                         <h3
-                            class="text-2xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
+                            class="text-4xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
                             YOU</h3>
-                        <p class="text-sm text-gray-400 tracking-widest uppercase mb-3">Bass</p>
-                        <p class="text-xs text-gray-500 leading-relaxed px-4">
-                            Groove master providing the solid foundation. Deep low end specialist.
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-4">
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
-                                    class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                        <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-4">Bass / ベース</p>
+
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://x.com/YOU_official" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/you_official/" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
                                     class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- DRUM: SHOW (Mobile: 4, PC: 4) -->
-                <div class="member-card group relative order-4 lg:order-4">
-                    <div class="aspect-[3/4] overflow-hidden bg-black">
-                        <img src="images/show.png" alt="SHOW - Drums" class="member-img w-full h-full object-cover">
+                <!-- DRUM: SHOW -->
+                <div class="member-card group relative cursor-pointer reveal" onclick="openMemberDetail('show')"
+                    style="transition-delay: 0.4s;">
+                    <div class="aspect-[3/4] overflow-hidden bg-black border border-white/10">
+                        <img src="images/member_show.png" alt="SHOW - Drums"
+                            class="member-img w-full h-full object-cover">
                     </div>
-                    <div class="mt-4 text-center">
+                    <div class="mt-8 text-center">
                         <h3
-                            class="text-2xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
+                            class="text-4xl font-oswald font-bold uppercase group-hover:text-brand-red transition-colors">
                             SHOW</h3>
-                        <p class="text-sm text-gray-400 tracking-widest uppercase mb-3">Drum</p>
-                        <p class="text-xs text-gray-500 leading-relaxed px-4">
-                            Power drummer driving the beat. The engine of the monster.
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-4">
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
-                                    class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i
+                        <p class="text-sm text-gray-400 tracking-[0.2em] uppercase mb-4">Drum / ドラム</p>
+
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://x.com/SHOW0327" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/show_327/?hl=ja" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
                                     class="fa-brands fa-instagram"></i></a>
+                            <a href="https://showtimeboxx.com/" target="_blank"
+                                class="text-white hover:text-brand-red transition-colors text-xl"><i
+                                    class="fa-solid fa-globe"></i></a>
                         </div>
                     </div>
                 </div>
@@ -504,38 +427,235 @@
         </div>
     </section>
 
-    <!-- Contact / Audition Section -->
+    <!-- Audition Section -->
     <section id="audition" class="py-24 bg-black-pure relative overflow-hidden">
         <!-- Background accents -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red rounded-full filter blur-[128px] opacity-20"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-900 rounded-full filter blur-[128px] opacity-10"></div>
 
-        <div class="max-w-4xl mx-auto text-center relative z-10 px-4">
-            <h2 class="text-5xl md:text-7xl font-oswald font-bold mb-6 tracking-tighter uppercase">
-                Are you the <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">Voice?</span>
-            </h2>
-            <p class="text-gray-400 mb-12 text-lg">
-                We are looking for a vocalist who can conquer the world with us.<br>
-                If you have the soul of a beast, contact us.
-            </p>
-
-            <a href="mailto:contact@newmonster-band.com"
-                class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold tracking-widest text-white border-2 border-brand-red bg-transparent hover:bg-brand-red transition-all duration-300 uppercase group">
-                Apply Now
-                <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
-                    </path>
-                </svg>
-            </a>
-
-            <div class="mt-16 text-gray-600 text-sm">
-                &copy; 2026 NEW MONSTER. All Rights Reserved.
+        <div class="max-w-4xl mx-auto relative z-10 px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-7xl font-oswald font-bold mb-6 tracking-tighter uppercase">
+                    VOCAL <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">AUDITION</span>
+                </h2>
+                <div class="space-y-4 text-gray-300">
+                    <p class="text-xl md:text-2xl font-oswald uppercase tracking-widest text-white">
+                        Are you the Voice that conquers the world?<br>
+                        <span class="text-brand-red">世界を征服する「声」を探している。</span>
+                    </p>
+                    <div class="text-left bg-dark-gray/50 p-8 rounded-xl border border-white/10 mt-12">
+                        <h3 class="text-2xl font-oswald font-bold mb-4 border-b border-brand-red pb-2 inline-block">
+                            REQUIREMENTS / 募集要項</h3>
+                        <ul class="space-y-4 text-sm md:text-base">
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-3">●</span>
+                                <div>
+                                    <strong>Gender:</strong> Male / <strong>Age:</strong> 25 or under<br>
+                                    性別：男性 / 年齢：25歳以下
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-3">●</span>
+                                <div>
+                                    <strong>Location:</strong> Able to active around Kanto area<br>
+                                    居住地：関東近郊での活動が可能な方
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-3">●</span>
+                                <div>
+                                    <strong>Nationality:</strong> No restriction<br>
+                                    国籍：不問
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
+            <h3 class="text-2xl font-oswald font-bold mb-4 uppercase">Project Data Download</h3>
+            <p class="text-gray-400 mb-6 text-sm italic">Download the project outline and demo
+                track.<br>プロジェクト概要およびデモ音源をこちらからダウンロードしてください。</p>
+            <a href="#"
+                class="inline-flex items-center px-10 py-4 bg-brand-red hover:bg-red-700 transition-colors rounded-full font-bold uppercase tracking-widest btn-premium">
+                <i class="fa-solid fa-cloud-arrow-down mr-3"></i> Download Project Kit
+            </a>
+        </div>
+
+        <!-- Application Form -->
+        <div
+            class="mt-24 md:mt-32 bg-dark-gray/80 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl reveal">
+            <h3 class="text-3xl font-oswald font-bold mb-8 text-center uppercase">Application Form / 応募フォーム</h3>
+            <form id="audition-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Name / 氏名</label>
+                        <input type="text" name="name" required
+                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Age / 年齢</label>
+                        <input type="number" name="age" required
+                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Email /
+                            メールアドレス</label>
+                        <input type="email" name="email" required
+                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Residence /
+                            居住地</label>
+                        <input type="text" name="residence" required
+                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"
+                            placeholder="例：東京都世田谷区">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Favorite Artists /
+                        好きなアーティスト</label>
+                    <input type="text" name="favorite_artists" required
+                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Profile /
+                        プロフィール・自己理解</label>
+                    <textarea name="profile" rows="4" required
+                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Audio/Video Links
+                        (Dropbox, YouTube, etc.) / 音源・動画URL</label>
+                    <input type="url" name="media_url" required
+                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"
+                        placeholder="https://...">
+                    <p class="text-[10px] text-gray-500 mt-2">※ DropboxやGoogle Driveの場合は、共有設定を「リンクを知っている全員」にしてください。
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <button type="submit"
+                        class="w-full bg-brand-red hover:bg-red-700 py-4 font-bold uppercase tracking-widest transition-all transform hover:scale-[1.02] shadow-xl">
+                        Submit Application / 送信する
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-32 text-gray-600 text-sm text-center">
+            &copy; 2026 Vocal Genesis Project. All Rights Reserved.
+        </div>
         </div>
     </section>
 
+    <!-- Member Detail Modal -->
+    <div id="member-modal"
+        class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
+        onclick="closeMemberDetail()">
+        <div id="modal-content" class="max-w-5xl w-full reveal-scale" onclick="event.stopPropagation()">
+            <button onclick="closeMemberDetail()" class="modal-close-btn">&times;</button>
+            <div id="modal-body">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const memberData = {
+            scin: {
+                name: "SCIN",
+                part: "Guitar",
+                desc: "音の職人。重厚なサウンドの壁を創り出す、バンドの攻撃性の主軸。楽曲制作のコアメンバーとしても活躍。",
+                img: "images/member_shin.jpg",
+                x: "https://x.com/SCIN_guitar",
+                ig: "https://www.instagram.com/scin_guitar/",
+                site: null
+            },
+            you: {
+                name: "YOU",
+                part: "Bass",
+                desc: "強固な土台を支えるグルーヴマスター。重低音のスペシャリストであり、プロジェクトのビジュアル・ディレクションも担当。",
+                img: "images/member_you.jpg",
+                x: "https://x.com/YOU_official",
+                ig: "https://www.instagram.com/you_official/",
+                site: null
+            },
+            show: {
+                name: "SHOW",
+                part: "Drum",
+                desc: "ビートを刻む精密機械。バンドのエンジンとしてリズムの骨組みを構築。常に至高のリズムを追求する。",
+                img: "images/member_show.png",
+                x: "https://x.com/SHOW0327",
+                ig: "https://www.instagram.com/show_327/?hl=ja",
+                site: "https://showtimeboxx.com/"
+            }
+        };
+
+        function openMemberDetail(id) {
+            const data = memberData[id];
+            const modal = document.getElementById('member-modal');
+            const body = document.getElementById('modal-body');
+
+            body.innerHTML = `
+                <div class="flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+                    <div class="w-full lg:w-2/5 aspect-[3/4] overflow-hidden rounded-lg shadow-2xl border border-white/10">
+                        <img src="${data.img}" class="w-full h-full object-cover" alt="${data.name}">
+                    </div>
+                    <div class="w-full lg:w-3/5 text-left">
+                        <h2 class="text-6xl md:text-8xl font-oswald font-bold text-white mb-4 tracking-tighter">${data.name}</h2>
+                        <div class="h-1 w-20 bg-brand-red mb-8"></div>
+                        <p class="text-2xl md:text-3xl text-brand-red font-oswald uppercase tracking-[0.3em] mb-8 font-bold">${data.part}</p>
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed font-light">${data.desc}</p>
+                        <div class="flex flex-wrap gap-6 mt-12 bg-white/5 p-6 rounded-xl items-center w-fit">
+                            <a href="${data.x}" target="_blank" class="text-4xl text-white hover:text-brand-red transition-all transform hover:scale-110"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="${data.ig}" target="_blank" class="text-4xl text-white hover:text-brand-red transition-all transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                            ${data.site ? `<a href="${data.site}" target="_blank" class="text-4xl text-white hover:text-brand-red transition-all transform hover:scale-110"><i class="fa-solid fa-globe"></i></a>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('modal-content').classList.add('active');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMemberDetail() {
+            document.getElementById('modal-content').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('member-modal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 500);
+        }
+
+        /* Scroll Reveal Observer */
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-scale').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form handler placeholder
+        document.getElementById('audition-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('応募ありがとうございます。担当者より追ってご連絡いたします。');
+        });
+    </script>
 </body>
 
 </html>
