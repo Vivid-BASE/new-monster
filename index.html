@@ -147,7 +147,7 @@
             transform: translateY(0);
         }
 
-        /* Preloader */
+        /* Cinematic Intro */
         #preloader {
             position: fixed;
             inset: 0;
@@ -156,19 +156,41 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 1s ease, visibility 1s;
+            transition: opacity 1s cubic-bezier(0.7, 0, 0.3, 1), visibility 1s;
+            overflow: hidden;
         }
 
-        .preloader-content {
-            text-align: center;
+        .intro-title {
+            font-size: 8vw;
+            font-weight: 800;
+            letter-spacing: 0.5em;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .intro-title.float-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-title.fly-away {
+            transform: scale(15) translateZ(0);
+            opacity: 0;
+            filter: blur(10px);
+            transition: all 0.8s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
         .loader-bar {
-            width: 200px;
-            height: 2px;
+            width: 300px;
+            height: 1px;
             background: rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
-            position: relative;
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
             overflow: hidden;
         }
 
@@ -285,11 +307,11 @@
 
 <body class="bg-black text-white">
 
-    <!-- Preloader -->
+    <!-- Preloader / Intro -->
     <div id="preloader">
-        <div class="preloader-content reveal active">
-            <h2 class="text-4xl font-oswald font-bold tracking-[0.5em] mb-4">VOCAL GENESIS</h2>
-            <div class="loader-bar mx-auto"></div>
+        <div class="preloader-content relative w-full h-full flex items-center justify-center">
+            <h2 id="intro-text" class="intro-title font-oswald uppercase tracking-[0.5em]">VOCAL GENESIS</h2>
+            <div class="loader-bar"></div>
         </div>
     </div>
 
@@ -725,16 +747,29 @@
             }, 500);
         }
 
-        /* Preloader Control */
-        window.addEventListener('load', () => {
+        /* Preloader / Intro Control */
+        window.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
+            const introText = document.getElementById('intro-text');
+
+            // 1. Float Up
+            setTimeout(() => {
+                introText.classList.add('float-up');
+            }, 500);
+
+            // 2. Fly Away
+            setTimeout(() => {
+                introText.classList.add('fly-away');
+            }, 2500);
+
+            // 3. Reveal Site
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 setTimeout(() => {
                     preloader.style.visibility = 'hidden';
                     document.body.classList.add('intro-active');
                 }, 1000);
-            }, 1000);
+            }, 3000);
         });
 
         /* Scroll Reveal Observer */
