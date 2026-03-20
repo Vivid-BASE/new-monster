@@ -766,6 +766,8 @@
             const showMsg = (text, isError) => {
                 msgArea.innerText = text;
                 msgArea.className = `block text-sm p-4 rounded-lg mb-6 text-center ${isError ? 'bg-red-900/50 text-red-200 border border-red-500/50' : 'bg-green-900/50 text-green-200 border border-green-500/50'}`;
+                // メッセージ位置までスクロール
+                msgArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
             };
 
             const originalBtnText = submitBtn.innerText;
@@ -799,7 +801,7 @@
                 }
 
                 if (WORKER_URL.includes('YOUR_CLOUDFLARE_WORKER_URL')) {
-                    throw new Error('WorkerのURLが設定されていません。resend_setup_guide.md を確認してURLを設定してください。');
+                    throw new Error('【重要】Cloudflare WorkerのURLが未設定です。resend_setup_guide.md の手順に従ってURLを取得し、index.htmlの760行目に貼り付けてください。');
                 }
 
                 const response = await fetch(WORKER_URL, {
@@ -817,16 +819,12 @@
                 if (result.success) {
                     showMsg('応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。', false);
                     form.reset();
-                    // 成功した場合はアラートも一応出す
-                    setTimeout(() => alert('応募が完了しました！'), 100);
                 } else {
                     throw new Error(result.error || '送信に失敗しました。');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 showMsg('【送信エラー】 ' + error.message, true);
-                // エラー時はアラートも出して確実に読めるようにする
-                alert('【送信エラー】\n' + error.message + '\n\n詳細は画面上の赤いメッセージをご確認ください。');
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
