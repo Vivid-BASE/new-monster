@@ -746,10 +746,63 @@
             observer.observe(el);
         });
 
-        // Form handler placeholder
-        document.getElementById('audition-form').addEventListener('submit', function (e) {
+        // Form handler
+        const form = document.getElementById('audition-form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        // Cloudflare Worker の URL をここに貼り付けてください
+        const WORKER_URL = 'https://YOUR_CLOUDFLARE_WORKER_URL_HERE';
+
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert('応募ありがとうございます。担当者より追ってご連絡いたします。');
+            
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending... / 送信中...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+
+            const formData = new FormData(form);
+
+            try {
+                // ファイルサイズチェック（簡易版）
+                const files = formData.getAll('vocal_files');
+                let totalSize = 0;
+                for (const file of files) {
+                    totalSize += file.size;
+                }
+                if (totalSize > 20 * 1024 * 1024) { // 20MB制限例
+                    throw new Error('添付ファイルの合計サイズが大きすぎます(20MBまで)。大容量ファイルはURLで共有してください。');
+                }
+
+                if (WORKER_URL.includes('YOUR_CLOUDFLARE_WORKER_URL')) {
+                    throw new Error('WorkerのURLが設定されていません。セットアップガイドを確認してください。');
+                }
+
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.details || errorData.error || 'サーバーエラーが発生しました。');
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。');
+                    form.reset();
+                } else {
+                    throw new Error(result.error || '送信に失敗しました。');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('【送信エラー】\n' + error.message + '\n\n時間をおいて再度お試しいただくか、解決しない場合はSNS等で直接ご連絡ください。');
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+            }
         });
 
         /* Back to Top Logic */
