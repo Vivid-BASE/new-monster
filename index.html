@@ -777,6 +777,15 @@
             const formData = new FormData(form);
 
             try {
+                // 音源提出の必須チェック（URLまたはファイルのどちらかが必要）
+                const mediaUrl = formData.get('media_url');
+                const vocalFiles = formData.getAll('vocal_files');
+                const hasVocalFile = vocalFiles.some(f => f.size > 0);
+
+                if (!mediaUrl && !hasVocalFile) {
+                    throw new Error('「音源・動画URL」の入力、または「歌唱ファイル」のアップロードのどちらかは必須です。');
+                }
+
                 // ファイルサイズチェック（合計30MB制限例）
                 let totalSize = 0;
                 for (const value of formData.values()) {
