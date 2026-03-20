@@ -231,6 +231,49 @@
         .btn-premium:hover::after {
             left: 100%;
         }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: rgba(139, 0, 0, 0.8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            background-color: #8B0000;
+            transform: translateY(-5px);
+        }
+
+        .stealth-link {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .stealth-link:hover {
+            opacity: 0.7;
+        }
     </style>
 </head>
 
@@ -242,7 +285,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3 md:px-6 md:py-4 flex flex-wrap justify-between items-center">
             <a href="#"
                 class="text-2xl font-oswald font-bold tracking-tighter text-white hover:text-brand-red transition-colors glitch-text"
-                data-text="VG">VOCAL GENESIS PROJECT</a>
+                data-text="VGP">VOCAL GENESIS PROJECT</a>
 
             <div class="flex items-center">
                 <button id="menu-btn"
@@ -265,17 +308,9 @@
                         <li><a href="#audition"
                                 class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0"
                                 onclick="toggleMenu()">AUDITION</a></li>
-                        <li><a href="#audition"
-                                class="text-gray-300 hover:text-brand-red transition-colors block py-2 md:py-0 border border-white/30 px-4 py-1 hover:border-brand-red ml-0 md:ml-4"
-                                onclick="toggleMenu()">APPLY</a></li>
 
                         <li
                             class="pt-4 md:pt-0 md:pl-4 flex space-x-4 md:border-l border-gray-700 justify-center w-full md:w-auto border-t md:border-t-0 mt-2 md:mt-0">
-                            <a href="https://x.com/VOCALGENESIS"
-                                class="text-white hover:text-brand-red transition-colors text-lg"><i
-                                    class="fa-brands fa-x-twitter"></i></a>
-                            <a href="#" class="text-white hover:text-brand-red transition-colors text-lg"><i
-                                    class="fa-brands fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -313,24 +348,20 @@
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-10 text-center px-4">
             <div class="hero-title-reveal">
-                <h1 class="text-7xl md:text-[10rem] font-bold text-oswald tracking-tighter uppercase mb-4 glitch-text relative inline-block mix-blend-screen leading-none"
-                    data-text="VOICE GENESIS">
-                    VOICE GENESIS
+                <h1 class="text-7xl md:text-[8rem] lg:text-[10rem] font-bold text-oswald tracking-tighter uppercase mb-4 glitch-text relative inline-block mix-blend-screen leading-none"
+                    data-text="VOCAL GENESIS PROJECT">
+                    VOCAL GENESIS PROJECT
                 </h1>
             </div>
             <div class="hero-sub-reveal">
                 <p class="text-xl md:text-3xl tracking-[0.3em] text-gray-300 font-bold uppercase mt-6">
-                    -Next Generation Rock-
+                    -The New Standard of Rock-
                 </p>
             </div>
-            <div class="mt-8 space-y-2 hero-sub-reveal" style="transition-delay: 2.3s;">
-                <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
+            <div class="mt-8 space-y-4 hero-sub-reveal" style="transition-delay: 2.3s;">
+                <p class="text-lg md:text-3xl text-white font-oswald tracking-widest leading-relaxed">
                     ゼロから始めるロックバンドオーディション<br>
-                    <span class="text-sm opacity-70">A Rock Band Audition Starting from Zero</span>
-                </p>
-                <p class="text-lg md:text-xl text-white font-oswald tracking-widest">
-                    ロックバンドは人生を輝かせる<br>
-                    <span class="text-sm opacity-70">Rock Bands Make Life Shine</span>
+                    <span class="text-sm md:text-lg opacity-70 block mt-2">A Rock Band Audition Starting from Zero</span>
                 </p>
             </div>
             <div class="mt-12 hero-sub-reveal" style="transition-delay: 2.6s;">
@@ -358,18 +389,20 @@
     <section id="concept" class="py-32 bg-black-pure px-6">
         <div class="max-w-4xl mx-auto text-center reveal">
             <h2 class="text-brand-red text-sm tracking-[0.3em] font-bold mb-8 uppercase">Concept / コンセプト</h2>
-            <p class="text-3xl md:text-5xl font-oswald font-bold leading-tight mb-12">
-                THE EVOLUTION OF SOUND.<br>
-                <span class="text-gray-500">DEFINED BY VOICE.</span>
+            <p class="text-3xl md:text-5xl font-oswald font-bold leading-tight mb-12 uppercase">
+                THE GENESIS OF SOUND.<br>
+                <span class="text-brand-red">DEFINED BY YOUR VOICE.</span>
             </p>
             <div class="space-y-6 text-gray-400 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto font-light">
                 <p>
-                    音の進化、その極致へ。<br>
-                    未知なる道を拓き、唯一無二の「声」がそこに魂を吹き込む。
+                    予定調和を破壊し、新たなる旋律の胎動へ。<br>
+                    歴戦のプレイヤーたちが集結し、魂を揺さぶる至高のロックを響かせる。<br>
+                    唯一無二の「声」が加わるとき、伝説は完成する。
                 </p>
-                <p class="opacity-60 text-base md:text-lg">
-                    We push the boundaries of sound to its absolute limit.<br>
-                    Where new paths are forged, a singular "Voice" breathes life into the soul.
+                <p class="opacity-60 text-base md:text-lg italic">
+                    Breaking harmony, birthing a new resonance.<br>
+                    Veteran musicians unite to create rock that shakes the soul.<br>
+                    When that singular "Voice" joins us, the legend begins.
                 </p>
             </div>
 
@@ -474,113 +507,117 @@
                         class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">AUDITION</span>
                 </h2>
                 <div class="space-y-4 text-gray-300">
-                    <p class="text-lg md:text-2xl font-oswald uppercase tracking-widest text-white">
-                        Are you the Voice that conquers the world?<br>
-                        <span class="text-brand-red">世界を征服する「声」を探している。</span>
-                    </p>
-                    <div class="text-left bg-dark-gray/50 p-8 rounded-xl border border-white/10 mt-12">
-                        <h3 class="text-2xl font-oswald font-bold mb-4 border-b border-brand-red pb-2 inline-block">
-                            REQUIREMENTS / 募集要項</h3>
-                        <ul class="space-y-4 text-sm md:text-base">
-                            <li class="flex items-start">
-                                <span class="text-brand-red mr-3">●</span>
-                                <div>
-                                    <strong>Gender:</strong> Male / <strong>Age:</strong> 25 or under<br>
-                                    性別：男性 / 年齢：25歳以下
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-brand-red mr-3">●</span>
-                                <div>
-                                    <strong>Location:</strong> Able to active around Kanto area<br>
-                                    居住地：関東近郊での活動が可能な方
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-brand-red mr-3">●</span>
-                                <div>
-                                    <strong>Nationality:</strong> No restriction<br>
-                                    国籍：不問
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                <p class="text-lg md:text-2xl font-oswald uppercase tracking-widest text-white">
+                    Are you the Voice that completes the sound?<br>
+                    <span class="text-brand-red">この領域に到達できる「声」を探している。</span>
+                </p>
+                <div class="text-left bg-dark-gray/50 p-8 rounded-xl border border-white/10 mt-12 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-oswald font-bold mb-4 border-b border-brand-red pb-2 inline-block">
+                        REQUIREMENTS / 募集要項</h3>
+                    <ul class="space-y-4 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <span class="text-brand-red mr-3">●</span>
+                            <div>
+                                <strong>Gender:</strong> Male / <strong>Age:</strong> 25 or under<br>
+                                <span class="text-gray-400">性別：男性 / 年齢：25歳以下</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-red mr-3">●</span>
+                            <div>
+                                <strong>Location:</strong> Able to active around Kanto area<br>
+                                <span class="text-gray-400">居住地：関東近郊での活動が可能な方</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-red mr-3">●</span>
+                            <div>
+                                <strong>Status:</strong> Professional mindset<br>
+                                <span class="text-gray-400">プロ意識を高く持ち、真剣に取り組める方</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <h3 class="text-2xl font-oswald font-bold mb-4 uppercase">Project Data Download</h3>
-            <p class="text-gray-400 mb-6 text-sm italic">Download the project outline and demo
-                track.<br>プロジェクト概要およびデモ音源をこちらからダウンロードしてください。</p>
-            <a href="#"
-                class="inline-flex items-center px-10 py-4 bg-brand-red hover:bg-red-700 transition-colors rounded-full font-bold uppercase tracking-widest btn-premium">
-                <i class="fa-solid fa-cloud-arrow-down mr-3"></i> Download Project Kit
-            </a>
+            <div class="bg-white/5 p-8 rounded-xl border border-white/10 mb-12 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-oswald font-bold mb-4 uppercase text-center md:text-left">Project Data & Materials</h3>
+                <p class="text-gray-300 mb-6 text-sm leading-relaxed text-center md:text-left">
+                    プロジェクトの方向性、およびオーディション用のデモ楽曲（インスト）を<br class="hidden md:block">こちらからダウンロードしてください。<br>
+                    <span class="text-brand-red font-bold">【必須】資料の中から2曲以上を選択し、自分の歌声を録音（または動画撮影）したものを送ってください。</span>
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                    <a href="https://www.dropbox.com/scl/fo/hhf52lwva3vhn3k8pqjof/ANWpI2Jca_cGeY4Hxb2a5VU?rlkey=onrs697a7x5g55drdci0yhfx9&st=kos8wfha&dl=0" target="_blank"
+                        class="inline-flex items-center justify-center px-10 py-4 bg-brand-red hover:bg-red-700 transition-colors rounded font-bold uppercase tracking-widest btn-premium w-full md:w-auto">
+                        <i class="fa-solid fa-cloud-arrow-down mr-3"></i> Get Audition Tracks
+                    </a>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-4 italic text-center md:text-left">*Please select 2 or more tracks from the folder, record your vocal (audio or video), and submit via the form below.</p>
+            </div>
         </div>
 
         <!-- Application Form -->
         <div
-            class="mt-24 md:mt-32 bg-dark-gray/80 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl reveal">
+            class="mt-24 md:mt-32 bg-dark-gray/80 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl reveal max-w-2xl mx-auto">
             <h3 class="text-3xl font-oswald font-bold mb-8 text-center uppercase">Application Form / 応募フォーム</h3>
-            <form id="audition-form" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Name / 氏名</label>
-                        <input type="text" name="name" required
-                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Age / 年齢</label>
-                        <input type="number" name="age" required
-                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Email /
-                            メールアドレス</label>
-                        <input type="email" name="email" required
-                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Residence /
-                            居住地</label>
-                        <input type="text" name="residence" required
-                            class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"
-                            placeholder="例：東京都世田谷区">
-                    </div>
+            <form id="audition-form" class="space-y-8">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Name / 氏名</label>
+                    <input type="text" name="name" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
+                        placeholder="山田 太郎">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Favorite Artists /
-                        好きなアーティスト</label>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Date of Birth / 生年月日</label>
+                    <input type="text" name="dob" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
+                        placeholder="例：2000年1月1日">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Age / 年齢</label>
+                    <input type="number" name="age" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
+                        placeholder="20">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Email / メールアドレス</label>
+                    <input type="email" name="email" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
+                        placeholder="example@gmail.com">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Address / 住所</label>
+                    <input type="text" name="address" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
+                        placeholder="例：東京都世田谷区◯◯ 1-2-3">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Favorite Artists / 好きなアーティスト</label>
                     <input type="text" name="favorite_artists" required
-                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white">
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Profile /
-                        プロフィール</label>
-                    <textarea name="profile" rows="4" required
-                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"></textarea>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Profile / プロフィール</label>
+                    <textarea name="profile" rows="5" required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"></textarea>
                 </div>
                 <div>
-                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Audio/Video Links
-                        (Dropbox, YouTube, etc.) / 音源・動画URL</label>
-                    <input type="url" name="media_url" required
-                        class="w-full bg-black border border-white/20 px-4 py-3 rounded focus:outline-none focus:border-brand-red text-white"
-                        placeholder="https://...">
-                    <p class="text-[10px] text-gray-500 mt-2">※ DropboxやGoogle Driveの場合は、共有設定を「リンクを知っている全員」にしてください。
-                    </p>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Vocal Files (MP3, WAV, etc.) / 歌唱音源・動画</label>
+                    <input type="file" name="vocal_files" multiple required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors file:bg-brand-red file:border-none file:text-white file:px-4 file:py-1 file:rounded file:mr-4 file:cursor-pointer hover:file:bg-red-700">
+                    <p class="text-[10px] text-gray-500 mt-3 ml-1 italic">※資料から2曲以上選んで、録音または録画したファイルを複数選択してアップロードしてください。</p>
                 </div>
-                <div class="pt-6">
+                <div class="pt-8">
                     <button type="submit"
-                        class="w-full bg-brand-red hover:bg-red-700 py-4 font-bold uppercase tracking-widest transition-all transform hover:scale-[1.02] shadow-xl">
-                        Submit Application / 送信する
+                        class="w-full bg-brand-red hover:bg-red-700 py-5 rounded-lg font-bold uppercase tracking-widest transition-all transform hover:scale-[1.01] shadow-2xl active:scale-95">
+                        Submit Application / 応募する
                     </button>
                 </div>
             </form>
         </div>
 
         <div class="mt-32 text-gray-600 text-sm text-center">
-            &copy; 2026 Vocal Genesis Project. All Rights Reserved.
+            &copy; 2026 Vocal Genesis Project. All Rights Reserved. | Produced by <a href="https://showtimeboxx.com/creative/" class="stealth-link">SHOWTIMEBOXX CREATIVE</a>
         </div>
         </div>
     </section>
@@ -706,7 +743,23 @@
             e.preventDefault();
             alert('応募ありがとうございます。担当者より追ってご連絡いたします。');
         });
+
+        /* Back to Top Logic */
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
+    <div id="back-to-top" title="Topへ戻る">
+        <i class="fa-solid fa-chevron-up"></i>
+    </div>
 </body>
 
 </html>
