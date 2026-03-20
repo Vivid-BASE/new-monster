@@ -831,14 +831,14 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    showMsg('応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。', false);
+                    showMsg('Thank you for your application! We will contact you after reviewing the details. / 応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。', false);
                     form.reset();
                 } else {
-                    throw new Error(result.error || '送信に失敗しました。');
+                    throw new Error(result.error || 'Submission failed. / 送信に失敗しました。');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                showMsg('【送信エラー】 ' + error.message, true);
+                showMsg('【Submission Error / 送信エラー】 ' + error.message, true);
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
