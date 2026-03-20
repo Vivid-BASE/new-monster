@@ -757,7 +757,7 @@
         const form = document.getElementById('audition-form');
         const submitBtn = form.querySelector('button[type="submit"]');
         // Cloudflare Worker の URL をここに貼り付けてください
-        const WORKER_URL = 'https://YOUR_CLOUDFLARE_WORKER_URL_HERE';
+        const WORKER_URL = '/api/resend';
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -800,9 +800,7 @@
                     throw new Error('添付ファイルの合計サイズが大きすぎます(30MBまで)。大容量ファイルはURLで共有してください。');
                 }
 
-                if (WORKER_URL.includes('YOUR_CLOUDFLARE_WORKER_URL')) {
-                    throw new Error('【重要】Cloudflare WorkerのURLが未設定です。resend_setup_guide.md の手順に従ってURLを取得し、index.htmlの760行目に貼り付けてください。');
-                }
+                // Cloudflare Pages Functions (/functions/api/resend.js) にリクエストを送信
 
                 const response = await fetch(WORKER_URL, {
                     method: 'POST',
