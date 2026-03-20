@@ -13,6 +13,27 @@ export async function onRequestPost(context) {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // 環境変数の存在確認
+  if (!env.RESEND_API_KEY) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: 'Cloudflareの環境変数に「RESEND_API_KEY」が設定されていません。管理画面の設定を確認してください。' 
+    }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
+  if (!env.NOTIFICATION_EMAIL) {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: 'Cloudflareの環境変数に「NOTIFICATION_EMAIL」が設定されていません。' 
+    }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
     const formData = await request.formData();
     const name = formData.get('name');
