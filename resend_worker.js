@@ -27,23 +27,29 @@ export default {
       const media_url = formData.get('media_url') || 'N/A';
       
       const vocalFiles = formData.getAll('vocal_files');
+      const photoFiles = formData.getAll('photo_files');
       
       const attachments = [];
 
-      for (const file of vocalFiles) {
-        if (file instanceof File && file.size > 0) {
-          const arrayBuffer = await file.arrayBuffer();
-          const base64Content = btoa(
-            new Uint8Array(arrayBuffer)
-              .reduce((data, byte) => data + String.fromCharCode(byte), '')
-          );
-          
-          attachments.push({
-            filename: file.name,
-            content: base64Content,
-          });
+      const processFiles = async (files) => {
+        for (const file of files) {
+          if (file instanceof File && file.size > 0) {
+            const arrayBuffer = await file.arrayBuffer();
+            const base64Content = btoa(
+              new Uint8Array(arrayBuffer)
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')
+            );
+            
+            attachments.push({
+              filename: file.name,
+              content: base64Content,
+            });
+          }
         }
-      }
+      };
+
+      await processFiles(vocalFiles);
+      await processFiles(photoFiles);
 
       const mailSubject = `【VGP応募】${name}様 よりオーディション応募がありました`;
 
@@ -71,7 +77,7 @@ export default {
             </table>
             <h3>プロフィール</h3>
             <p style="white-space: pre-wrap;">${profile}</p>
-            <p>※添付ファイル数: ${attachments.length}件</p>
+            <p>※音源添付: ${vocalFiles.filter(f => f.size > 0).length}件 / 写真添付: ${photoFiles.filter(f => f.size > 0).length}件</p>
           `,
           attachments: attachments
         }),

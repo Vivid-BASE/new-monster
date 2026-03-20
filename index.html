@@ -600,6 +600,12 @@
                         class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"></textarea>
                 </div>
                 <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Photo (Face/Full body) / 写真（正面・全身など）</label>
+                    <input type="file" name="photo_files" accept="image/*" multiple required
+                        class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors file:bg-brand-red file:border-none file:text-white file:px-4 file:py-1 file:rounded file:mr-4 file:cursor-pointer hover:file:bg-red-700">
+                    <p class="text-[10px] text-gray-500 mt-3 ml-1 italic">※顔がはっきりわかる写真を1枚以上アップロードしてください。</p>
+                </div>
+                <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-500 mb-3 ml-1">Audio/Video Links (YouTube, SNS, etc.) / 音源・動画URL</label>
                     <input type="url" name="media_url"
                         class="w-full bg-black/50 border border-white/10 px-4 py-4 rounded-lg focus:outline-none focus:border-brand-red text-white transition-colors"
@@ -612,6 +618,7 @@
                     <p class="text-[10px] text-gray-500 mt-3 ml-1 italic">※資料から2曲以上選んで、ファイルをアップロードまたはURLを貼ってください（両方でも可）。</p>
                 </div>
                 <div class="pt-8">
+                    <div id="form-message" class="hidden text-sm p-4 rounded-lg mb-6 text-center"></div>
                     <button type="submit"
                         class="w-full bg-brand-red hover:bg-red-700 py-5 rounded-lg font-bold uppercase tracking-widest transition-all transform hover:scale-[1.01] shadow-2xl active:scale-95">
                         Submit Application / 応募する
@@ -755,26 +762,35 @@
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
             
+            const msgArea = document.getElementById('form-message');
+            const showMsg = (text, isError) => {
+                msgArea.innerText = text;
+                msgArea.className = `block text-sm p-4 rounded-lg mb-6 text-center ${isError ? 'bg-red-900/50 text-red-200 border border-red-500/50' : 'bg-green-900/50 text-green-200 border border-green-500/50'}`;
+            };
+
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Sending... / 送信中...';
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.7';
+            msgArea.classList.add('hidden');
 
             const formData = new FormData(form);
 
             try {
-                // ファイルサイズチェック（簡易版）
-                const files = formData.getAll('vocal_files');
+                // ファイルサイズチェック（合計30MB制限例）
                 let totalSize = 0;
-                for (const file of files) {
-                    totalSize += file.size;
+                for (const value of formData.values()) {
+                    if (value instanceof File) {
+                        totalSize += value.size;
+                    }
                 }
-                if (totalSize > 20 * 1024 * 1024) { // 20MB制限例
-                    throw new Error('添付ファイルの合計サイズが大きすぎます(20MBまで)。大容量ファイルはURLで共有してください。');
+                
+                if (totalSize > 30 * 1024 * 1024) {
+                    throw new Error('添付ファイルの合計サイズが大きすぎます(30MBまで)。大容量ファイルはURLで共有してください。');
                 }
 
                 if (WORKER_URL.includes('YOUR_CLOUDFLARE_WORKER_URL')) {
-                    throw new Error('WorkerのURLが設定されていません。セットアップガイドを確認してください。');
+                    throw new Error('WorkerのURLが設定されていません。resend_setup_guide.md を確認してURLを設定してください。');
                 }
 
                 const response = await fetch(WORKER_URL, {
@@ -790,14 +806,18 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    alert('応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。');
+                    showMsg('応募ありがとうございます！内容を確認次第、担当者よりご連絡いたします。', false);
                     form.reset();
+                    // 成功した場合はアラートも一応出す
+                    setTimeout(() => alert('応募が完了しました！'), 100);
                 } else {
                     throw new Error(result.error || '送信に失敗しました。');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('【送信エラー】\n' + error.message + '\n\n時間をおいて再度お試しいただくか、解決しない場合はSNS等で直接ご連絡ください。');
+                showMsg('【送信エラー】 ' + error.message, true);
+                // エラー時はアラートも出して確実に読めるようにする
+                alert('【送信エラー】\n' + error.message + '\n\n詳細は画面上の赤いメッセージをご確認ください。');
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
